@@ -1,4 +1,3 @@
-
 import 'package:cambridge_wealth/models/bottom_navigation_item_data.dart';
 import 'package:cambridge_wealth/widgets/score.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +13,12 @@ class PhoneHome extends StatefulWidget {
 }
 
 class PhoneHomeState extends State<PhoneHome> {
-
-  List<BottomNavigationItemData> actions = [BottomNavigationItemData(onClick: (){}, icon: Icons.home, name: 'Home', selected: true),BottomNavigationItemData(onClick: (){}, icon: Icons.settings, name: 'Settings', selected: false)];
+  List<BottomNavigationItemData> actions = [
+    BottomNavigationItemData(
+        onClick: () {}, icon: Icons.home, name: 'Home', selected: true),
+    BottomNavigationItemData(
+        onClick: () {}, icon: Icons.settings, name: 'Settings', selected: false)
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +88,8 @@ class PhoneHomeState extends State<PhoneHome> {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(left: 24,right: 24,bottom: 16),
+                  margin:
+                      const EdgeInsets.only(left: 24, right: 24, bottom: 16),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -148,24 +152,18 @@ class PhoneHomeState extends State<PhoneHome> {
               ],
             ),
           ),
-
           bottomNavigationBar: Container(
-
             height: 80,
-
             decoration: BoxDecoration(
-
-              borderRadius: const BorderRadius.only(topLeft: Radius.circular(8),topRight: Radius.circular(8)),
-              color: Colors.grey[900]
-
-            ),
-
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(8), topRight: Radius.circular(8)),
+                color: Colors.grey[900]),
             child: Row(
-              
-              children: actions.map((e){ return Expanded(child: BottomNavigationButton(bottomNavigationItemData: e));}).toList(),
-              
+              children: actions.map((e) {
+                return Expanded(
+                    child: BottomNavigationButton(bottomNavigationItemData: e));
+              }).toList(),
             ),
-
           ),
         ),
       ],
