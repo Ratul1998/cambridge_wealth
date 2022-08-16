@@ -1,0 +1,31 @@
+import 'package:flutter/cupertino.dart';
+
+class LayoutBuilderUtil extends StatelessWidget{
+
+  final Widget webView,phoneView;
+
+  const LayoutBuilderUtil({Key? key, required this.webView, required this.phoneView}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+
+    return LayoutBuilder(builder: (context, constraints) {
+
+      if (constraints.maxWidth > 800) {
+        return SafeArea(
+
+          child: webView,
+        ); const Center(child: Text('Web Page'),);
+      } else {
+        return SafeArea(
+
+          child: phoneView,
+        );
+      }
+
+    });
+
+
+  }
+
+}
