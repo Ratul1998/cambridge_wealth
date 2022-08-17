@@ -4,12 +4,10 @@ import 'package:cambridge_wealth/bloc/homepage/state.dart';
 import 'package:cambridge_wealth/models/bottom_navigation_item_data.dart';
 import 'package:cambridge_wealth/models/home_page_data.dart';
 import 'package:cambridge_wealth/utils/style.dart';
-import 'package:cambridge_wealth/widgets/score.dart';
+import 'package:cambridge_wealth/widgets/score_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../webpages/bottom_navigation_item.dart';
-import '../widgets/home_page_row.dart';
 import '../widgets/notification_section.dart';
 import '../widgets/user_settings.dart';
 
@@ -128,72 +126,7 @@ class PhoneHomeState extends State<PhoneHome> {
                             ],
                           ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(
-                              left: Spacing.space24,
-                              right: Spacing.space24,
-                              bottom: Spacing.space16),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 8,
-                                height: context.displayHeight * 0.15,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.amber),
-                              ),
-                              Expanded(
-                                  child: Column(
-                                children: [
-                                  Container(
-                                    margin: const EdgeInsets.only(top: 12),
-                                    child: Row(
-                                      children: [
-                                        const Score(
-                                            value: '14,552', title: 'SCORE'),
-                                        Container(
-                                          width: 1,
-                                          height: 56,
-                                          color: Colors.white,
-                                        ),
-                                        const Score(
-                                            value: '10,552', title: 'CREDIT'),
-                                        Container(
-                                          width: 1,
-                                          height: 56,
-                                          color: Colors.white,
-                                        ),
-                                        const Score(
-                                            value: '1,552', title: 'COINS'),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: const EdgeInsets.only(
-                                        left: Spacing.space16,
-                                        top: Spacing.space12,
-                                        bottom: Spacing.space12),
-                                    child: Text(
-                                      homePageData.description,
-                                      style: context.textTheme.body1Normal,
-                                    ),
-                                  ),
-                                ],
-                              )),
-                            ],
-                          ),
-                        ),
-                        ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: homePageData.homePageCards.length,
-                            itemBuilder: (context, index) {
-                              return HomePageRow(
-                                homePageCardData:
-                                    homePageData.homePageCards[index],
-                              );
-                            }),
+                        ScoreLayout(homePageData: homePageData),
                       ],
                     ),
                   );
