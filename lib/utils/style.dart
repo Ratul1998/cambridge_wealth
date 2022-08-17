@@ -1,4 +1,4 @@
-import 'package:cambridge_wealth/utils/size_config.dart';
+import 'package:cambridge_wealth/utils/NavigationService.dart';
 import 'package:flutter/material.dart';
 
 class ColorShades {
@@ -16,21 +16,30 @@ extension CustomColorScheme on ColorScheme {
   Color get primaryColor => ColorShades.yellow;
 }
 
+double getFontSize({required double start, required double end}) {
+  return NavigationService.navigatorKey.currentContext!.safeBlockHorizontal > end
+      ? end
+      : NavigationService.navigatorKey.currentContext!.safeBlockHorizontal < start
+      ? start
+      : NavigationService.navigatorKey.currentContext!.safeBlockHorizontal;
+}
+
 extension CustomTextTheme on TextTheme {
   TextStyle get h1 => TextStyle(
-        fontSize: SizeConfig.getFontSize(start: 20, end: 24),
+        fontSize: getFontSize(start: 20, end: 24),
         fontWeight: FontWeight.w600,
         color: ColorShades.white,
       );
 
+
   TextStyle get h2 => TextStyle(
-        fontSize: SizeConfig.getFontSize(start: 14, end: 20),
+        fontSize: getFontSize(start: 14, end: 20),
         fontWeight: FontWeight.w400,
         color: ColorShades.white,
       );
 
   TextStyle get body1Regular => TextStyle(
-        fontSize: SizeConfig.getFontSize(start: 12, end: 16),
+        fontSize: getFontSize(start: 12, end: 16),
         fontWeight: FontWeight.w400,
         color: ColorShades.white,
       );
@@ -92,4 +101,11 @@ extension ThemeFromContext on BuildContext {
   double get displayWidth => MediaQuery.of(this).size.width;
 
   double get displayHeight => MediaQuery.of(this).size.height;
+
+  double get safeBlockHorizontal => (displayWidth - MediaQuery.of(this).padding.left + MediaQuery.of(this).padding.right) / 100;
+
+  double get safeBlockVertical => (displayHeight - MediaQuery.of(this).padding.top + MediaQuery.of(this).padding.bottom) / 100;
+
+  bool get isWebView => displayWidth >= 800 ? true : false;
+
 }

@@ -2,7 +2,6 @@ import 'package:cambridge_wealth/bloc/homepage/bloc.dart';
 import 'package:cambridge_wealth/bloc/homepage/event.dart';
 import 'package:cambridge_wealth/bloc/homepage/state.dart';
 import 'package:cambridge_wealth/models/home_page_data.dart';
-import 'package:cambridge_wealth/utils/size_config.dart';
 import 'package:cambridge_wealth/widgets/SideNavigationBar.dart';
 import 'package:cambridge_wealth/widgets/notification_section.dart';
 import 'package:cambridge_wealth/widgets/user_settings.dart';
@@ -128,7 +127,7 @@ class WebHomeState extends State<WebHome> {
                                             Container(
                                               width: 8,
                                               height:
-                                              SizeConfig.screenHeight * 0.15,
+                                              context.displayHeight * 0.15,
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                   BorderRadius.circular(10),

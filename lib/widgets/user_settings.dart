@@ -1,4 +1,3 @@
-import 'package:cambridge_wealth/utils/size_config.dart';
 import 'package:cambridge_wealth/widgets/settings_row.dart';
 import 'package:flutter/material.dart';
 
@@ -44,8 +43,7 @@ class UserSettings extends StatelessWidget{
             ),
 
             const SizedBox(height: Spacing.space16,),
-
-            GridView.count(crossAxisCount: (SizeConfig.screenWidth ~/ 120).toInt(),
+            GridView.count(crossAxisCount: context.displayWidth ~/ ((context.displayWidth > 800) ? 240 : 120),
               childAspectRatio: 6/8,
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,

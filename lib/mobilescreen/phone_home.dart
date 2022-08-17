@@ -3,7 +3,6 @@ import 'package:cambridge_wealth/bloc/homepage/event.dart';
 import 'package:cambridge_wealth/bloc/homepage/state.dart';
 import 'package:cambridge_wealth/models/bottom_navigation_item_data.dart';
 import 'package:cambridge_wealth/models/home_page_data.dart';
-import 'package:cambridge_wealth/utils/size_config.dart';
 import 'package:cambridge_wealth/utils/style.dart';
 import 'package:cambridge_wealth/widgets/score.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +44,7 @@ class PhoneHomeState extends State<PhoneHome> {
     return Stack(
       children: [
         Container(
-          height: SizeConfig.screenHeight / 2.5,
+          height: context.displayHeight / 2.5,
           decoration: const BoxDecoration(
             color: Colors.black,
             image: DecorationImage(
@@ -140,7 +139,7 @@ class PhoneHomeState extends State<PhoneHome> {
                             children: [
                               Container(
                                 width: 8,
-                                height: SizeConfig.screenHeight * 0.15,
+                                height: context.displayHeight * 0.15,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     color: Colors.amber),

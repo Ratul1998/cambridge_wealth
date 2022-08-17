@@ -3,6 +3,7 @@ import 'package:cambridge_wealth/bloc/notifications/bloc.dart';
 import 'package:cambridge_wealth/repositories/home_repository.dart';
 import 'package:cambridge_wealth/repositories/notification_repository.dart';
 import 'package:cambridge_wealth/screens/home_page.dart';
+import 'package:cambridge_wealth/utils/NavigationService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        navigatorKey: NavigationService.navigatorKey,
         theme: ThemeData(
           primarySwatch: Colors.amber,
         ),
