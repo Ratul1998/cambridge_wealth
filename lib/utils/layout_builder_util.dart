@@ -10,7 +10,6 @@ class LayoutBuilderUtil extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-
       if (constraints.maxWidth > 800) {
         return SafeArea(
           child: webView,

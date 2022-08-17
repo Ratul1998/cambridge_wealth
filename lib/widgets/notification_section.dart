@@ -101,4 +101,10 @@ class NotificationSectionState extends State<NotificationSection> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 }

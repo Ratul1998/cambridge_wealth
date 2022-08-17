@@ -75,8 +75,7 @@ class PhoneHomeState extends State<PhoneHome> {
                     marginRight: Spacing.space16,
                     marginTop: Spacing.space16);
               } else {
-
-                if(selectedIndex == 0){
+                if (selectedIndex == 0) {
                   widget = SingleChildScrollView(
                     physics: const ScrollPhysics(),
                     child: Column(
@@ -95,7 +94,7 @@ class PhoneHomeState extends State<PhoneHome> {
                                 width: 56,
                                 decoration: const BoxDecoration(
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(8)),
+                                        BorderRadius.all(Radius.circular(8)),
                                     color: Colors.white,
                                     image: DecorationImage(
                                         image: AssetImage(
@@ -146,40 +145,42 @@ class PhoneHomeState extends State<PhoneHome> {
                               ),
                               Expanded(
                                   child: Column(
-                                    children: [
-                                      Container(
-                                        margin: const EdgeInsets.only(top: 12),
-                                        child: Row(
-                                          children: [
-                                            const Score(
-                                                value: '14,552', title: 'SCORE'),
-                                            Container(
-                                              width: 1,
-                                              height: 56,
-                                              color: Colors.white,
-                                            ),
-                                            const Score(
-                                                value: '10,552', title: 'CREDIT'),
-                                            Container(
-                                              width: 1,
-                                              height: 56,
-                                              color: Colors.white,
-                                            ),
-                                            const Score(
-                                                value: '1,552', title: 'COINS'),
-                                          ],
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.only(top: 12),
+                                    child: Row(
+                                      children: [
+                                        const Score(
+                                            value: '14,552', title: 'SCORE'),
+                                        Container(
+                                          width: 1,
+                                          height: 56,
+                                          color: Colors.white,
                                         ),
-                                      ),
-                                      Container(
-                                        margin: const EdgeInsets.only(
-                                            left: 16, top: 12, bottom: 12),
-                                        child: Text(
-                                          homePageData.description,
-                                          style: context.textTheme.body1Normal,
+                                        const Score(
+                                            value: '10,552', title: 'CREDIT'),
+                                        Container(
+                                          width: 1,
+                                          height: 56,
+                                          color: Colors.white,
                                         ),
-                                      ),
-                                    ],
-                                  )),
+                                        const Score(
+                                            value: '1,552', title: 'COINS'),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.only(
+                                        left: Spacing.space16,
+                                        top: Spacing.space12,
+                                        bottom: Spacing.space12),
+                                    child: Text(
+                                      homePageData.description,
+                                      style: context.textTheme.body1Normal,
+                                    ),
+                                  ),
+                                ],
+                              )),
                             ],
                           ),
                         ),
@@ -190,17 +191,19 @@ class PhoneHomeState extends State<PhoneHome> {
                             itemBuilder: (context, index) {
                               return HomePageRow(
                                 homePageCardData:
-                                homePageData.homePageCards[index],
+                                    homePageData.homePageCards[index],
                               );
                             }),
                       ],
                     ),
                   );
+                } else {
+                  widget = const UserSettings(
+                    marginTop: Spacing.space32,
+                    marginRight: Spacing.space16,
+                    marginLeft: Spacing.space16,
+                  );
                 }
-                else {
-                  widget = const UserSettings(marginTop: Spacing.space32,marginRight: Spacing.space16,marginLeft: Spacing.space16,);
-                }
-
               }
             } else if (state is ErrorState) {
               widget = Center(
@@ -210,39 +213,43 @@ class PhoneHomeState extends State<PhoneHome> {
                 ),
               );
             }
-
             return widget;
           }),
-          bottomNavigationBar: Container(
-            height: 80,
-            decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(8), topRight: Radius.circular(8)),
-                color: Colors.grey[900]),
-            child: Row(
-              children: [
-                Expanded(
-                    child: BottomNavigationButton(
-                        navigationButtonData: actions[0],
-                        onClick: () {
-                          setState(() {
-                            selectedIndex = 0;
-                            isNotificationSelected = false;
-                          });
-                        },
-                        selected: selectedIndex == 0)),
-                Expanded(
-                    child: BottomNavigationButton(
-                        navigationButtonData: actions[1],
-                        onClick: () {
-                          setState(() {
-                            selectedIndex = 1;
-                            isNotificationSelected = false;
-                          });
-                        },
-                        selected: selectedIndex == 1)),
-              ],
-            ),
+          bottomNavigationBar: Wrap(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(8),
+                        topRight: Radius.circular(8)),
+                    color: Colors.grey[900]),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                        child: BottomNavigationButton(
+                            navigationButtonData: actions[0],
+                            onClick: () {
+                              setState(() {
+                                selectedIndex = 0;
+                                isNotificationSelected = false;
+                              });
+                            },
+                            selected: selectedIndex == 0)),
+                    Expanded(
+                        child: BottomNavigationButton(
+                            navigationButtonData: actions[1],
+                            onClick: () {
+                              setState(() {
+                                selectedIndex = 1;
+                                isNotificationSelected = false;
+                              });
+                            },
+                            selected: selectedIndex == 1)),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ],

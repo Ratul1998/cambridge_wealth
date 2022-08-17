@@ -21,14 +21,15 @@ class BottomNavigationButton extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            margin: const EdgeInsets.only(top: 16, bottom: 8),
+            margin: const EdgeInsets.only(
+                top: Spacing.space16, bottom: Spacing.space8),
             child: Icon(
               navigationButtonData.icon,
               color: selected ? context.colorScheme.primaryColor : Colors.white,
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(bottom: 8),
+            margin: const EdgeInsets.only(bottom: Spacing.space8),
             child: Text(
               navigationButtonData.name,
               style: context.textTheme.body1Medium.copyWith(

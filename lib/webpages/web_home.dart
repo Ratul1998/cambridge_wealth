@@ -95,7 +95,7 @@ class WebHomeState extends State<WebHome> {
                             );
                           } else if (state is FetchedState) {
                             HomePageData homePageData = state.homePageData;
-                            if(selectedIndex == 0){
+                            if (selectedIndex == 0) {
                               widget = RawScrollbar(
                                 isAlwaysShown: true,
                                 thumbColor: Colors.grey[800],
@@ -103,7 +103,8 @@ class WebHomeState extends State<WebHome> {
                                 thickness: 4,
                                 child: SingleChildScrollView(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Container(
                                         margin: const EdgeInsets.only(
@@ -122,78 +123,78 @@ class WebHomeState extends State<WebHome> {
                                             bottom: Spacing.space16),
                                         child: Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                              MainAxisAlignment.start,
                                           children: [
                                             Container(
                                               width: 8,
                                               height:
-                                              context.displayHeight * 0.15,
+                                                  context.displayHeight * 0.15,
                                               decoration: BoxDecoration(
                                                   borderRadius:
-                                                  BorderRadius.circular(10),
-                                                  color: context
-                                                      .colorScheme.primaryColor),
+                                                      BorderRadius.circular(10),
+                                                  color: context.colorScheme
+                                                      .primaryColor),
                                             ),
                                             Expanded(
                                                 child: Column(
-                                                  children: [
-                                                    Container(
-                                                      margin: const EdgeInsets.only(
-                                                          top: Spacing.space12),
-                                                      child: Row(
-                                                        children: [
-                                                          const Score(
-                                                              value: '14,552',
-                                                              title: 'SCORE'),
-                                                          Container(
-                                                            width: 1,
-                                                            height: 56,
-                                                            color: Colors.white,
-                                                          ),
-                                                          const Score(
-                                                              value: '10,552',
-                                                              title: 'CREDIT'),
-                                                          Container(
-                                                            width: 1,
-                                                            height: 56,
-                                                            color: Colors.white,
-                                                          ),
-                                                          const Score(
-                                                              value: '1,552',
-                                                              title: 'COINS'),
-                                                          Container(
-                                                            width: 1,
-                                                            height: 56,
-                                                            color: Colors.white,
-                                                          ),
-                                                          const Score(
-                                                              value: '2,552',
-                                                              title: 'MONEY'),
-                                                        ],
+                                              children: [
+                                                Container(
+                                                  margin: const EdgeInsets.only(
+                                                      top: Spacing.space12),
+                                                  child: Row(
+                                                    children: [
+                                                      const Score(
+                                                          value: '14,552',
+                                                          title: 'SCORE'),
+                                                      Container(
+                                                        width: 1,
+                                                        height: 56,
+                                                        color: Colors.white,
                                                       ),
-                                                    ),
-                                                    Container(
-                                                      margin: const EdgeInsets.only(
-                                                          left: 16,
-                                                          top: 12,
-                                                          bottom: 12),
-                                                      child: Text(
-                                                        homePageData.description,
-                                                        style: context
-                                                            .textTheme.body1Normal,
+                                                      const Score(
+                                                          value: '10,552',
+                                                          title: 'CREDIT'),
+                                                      Container(
+                                                        width: 1,
+                                                        height: 56,
+                                                        color: Colors.white,
                                                       ),
-                                                    ),
-                                                  ],
-                                                )),
+                                                      const Score(
+                                                          value: '1,552',
+                                                          title: 'COINS'),
+                                                      Container(
+                                                        width: 1,
+                                                        height: 56,
+                                                        color: Colors.white,
+                                                      ),
+                                                      const Score(
+                                                          value: '2,552',
+                                                          title: 'MONEY'),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Container(
+                                                  margin: const EdgeInsets.only(
+                                                      left: 16,
+                                                      top: 12,
+                                                      bottom: 12),
+                                                  child: Text(
+                                                    homePageData.description,
+                                                    style: context
+                                                        .textTheme.body1Normal,
+                                                  ),
+                                                ),
+                                              ],
+                                            )),
                                           ],
                                         ),
                                       ),
                                       ListView.builder(
                                           physics:
-                                          const NeverScrollableScrollPhysics(),
+                                              const NeverScrollableScrollPhysics(),
                                           shrinkWrap: true,
                                           itemCount:
-                                          homePageData.homePageCards.length,
+                                              homePageData.homePageCards.length,
                                           itemBuilder: (context, index) {
                                             return HomePageRow(
                                               homePageCardData: homePageData
@@ -204,11 +205,12 @@ class WebHomeState extends State<WebHome> {
                                   ),
                                 ),
                               );
+                            } else {
+                              widget = const UserSettings(
+                                  marginTop: Spacing.space32,
+                                  marginLeft: Spacing.space16,
+                                  marginRight: Spacing.space16);
                             }
-                            else{
-                              widget = const UserSettings(marginTop: Spacing.space32, marginLeft: Spacing.space16, marginRight: Spacing.space16);
-                            }
-
                           } else if (state is ErrorState) {
                             widget = Center(
                               child: Text(

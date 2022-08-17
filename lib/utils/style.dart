@@ -17,11 +17,13 @@ extension CustomColorScheme on ColorScheme {
 }
 
 double getFontSize({required double start, required double end}) {
-  return NavigationService.navigatorKey.currentContext!.safeBlockHorizontal > end
+  return NavigationService.navigatorKey.currentContext!.safeBlockHorizontal >
+          end
       ? end
-      : NavigationService.navigatorKey.currentContext!.safeBlockHorizontal < start
-      ? start
-      : NavigationService.navigatorKey.currentContext!.safeBlockHorizontal;
+      : NavigationService.navigatorKey.currentContext!.safeBlockHorizontal <
+              start
+          ? start
+          : NavigationService.navigatorKey.currentContext!.safeBlockHorizontal;
 }
 
 extension CustomTextTheme on TextTheme {
@@ -30,7 +32,6 @@ extension CustomTextTheme on TextTheme {
         fontWeight: FontWeight.w600,
         color: ColorShades.white,
       );
-
 
   TextStyle get h2 => TextStyle(
         fontSize: getFontSize(start: 14, end: 20),
@@ -102,10 +103,17 @@ extension ThemeFromContext on BuildContext {
 
   double get displayHeight => MediaQuery.of(this).size.height;
 
-  double get safeBlockHorizontal => (displayWidth - MediaQuery.of(this).padding.left + MediaQuery.of(this).padding.right) / 100;
+  double get safeBlockHorizontal =>
+      (displayWidth -
+          MediaQuery.of(this).padding.left +
+          MediaQuery.of(this).padding.right) /
+      100;
 
-  double get safeBlockVertical => (displayHeight - MediaQuery.of(this).padding.top + MediaQuery.of(this).padding.bottom) / 100;
+  double get safeBlockVertical =>
+      (displayHeight -
+          MediaQuery.of(this).padding.top +
+          MediaQuery.of(this).padding.bottom) /
+      100;
 
   bool get isWebView => displayWidth >= 800 ? true : false;
-
 }

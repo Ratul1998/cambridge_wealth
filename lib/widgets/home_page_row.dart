@@ -1,6 +1,5 @@
 import 'package:cambridge_wealth/models/home_page_data.dart';
 import 'package:cambridge_wealth/utils/style.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePageRow extends StatelessWidget {
@@ -45,9 +44,20 @@ class HomePageRow extends StatelessWidget {
                     homePageCardData.description,
                     style: context.textTheme.body1Regular,
                   ))),
-          Text(
-            homePageCardData.rating,
-            style: context.textTheme.body1Regular,
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Icon(
+                Icons.star,
+                color: context.colorScheme.primaryColor,
+                size: 48,
+              ),
+              Text(
+                homePageCardData.rating,
+                style: context.textTheme.body2Regular
+                    .copyWith(fontSize: 10, color: Colors.black),
+              ),
+            ],
           ),
         ],
       ),
