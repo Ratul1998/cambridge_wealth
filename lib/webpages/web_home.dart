@@ -10,7 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../utils/style.dart';
 import 'package:flutter/material.dart';
 
-
 class WebHome extends StatefulWidget {
   const WebHome({Key? key}) : super(key: key);
 
@@ -74,8 +73,11 @@ class WebHomeState extends State<WebHome> {
                         decoration: BoxDecoration(
                             color:
                                 context.colorScheme.blackShade.withOpacity(0.8),
-                            borderRadius: const BorderRadius.only(topLeft: Radius.circular(8),topRight: Radius.circular(8)),
-                            border: Border.all(color: Colors.white.withOpacity(0.3))),
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(8),
+                                topRight: Radius.circular(8)),
+                            border: Border.all(
+                                color: Colors.white.withOpacity(0.3))),
                         child: BlocBuilder<HomePageBloc, HomePageState>(
                             builder: (context, state) {
                           Widget widget = const SizedBox();
