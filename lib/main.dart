@@ -1,5 +1,8 @@
+import 'package:cambridge_wealth/bloc/homepage/bloc.dart';
+import 'package:cambridge_wealth/repositories/home_repository.dart';
 import 'package:cambridge_wealth/screens/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +17,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.amber,
       ),
-      home: const HomePage(),
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => HomePageBloc(HomeRepository())),
+        ],
+        child: const HomePage(),
+      )
     );
   }
 }

@@ -1,14 +1,12 @@
+import 'package:cambridge_wealth/models/home_page_data.dart';
 import 'package:cambridge_wealth/utils/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../utils/size_config.dart';
-
 class HomePageRow extends StatelessWidget {
-  final String rating;
-  final String description;
+  final HomePageCardData homePageCardData;
 
-  const HomePageRow({Key? key, required this.rating, required this.description})
+  const HomePageRow({Key? key, required this.homePageCardData})
       : super(key: key);
 
   @override
@@ -17,7 +15,6 @@ class HomePageRow extends StatelessWidget {
       margin: const EdgeInsets.symmetric(
           horizontal: Spacing.space24, vertical: Spacing.space8),
       padding: const EdgeInsets.all(Spacing.space8),
-      height: SizeConfig.screenHeight * 0.15,
       decoration: BoxDecoration(
         color: context.colorScheme.blackShade,
         border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
@@ -45,11 +42,11 @@ class HomePageRow extends StatelessWidget {
               child: Container(
                   margin: const EdgeInsets.only(right: 8),
                   child: Text(
-                    description,
+                    homePageCardData.description,
                     style: context.textTheme.body1Regular,
                   ))),
           Text(
-            rating,
+            homePageCardData.rating,
             style: context.textTheme.body1Regular,
           ),
         ],

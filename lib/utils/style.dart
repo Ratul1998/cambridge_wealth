@@ -30,7 +30,7 @@ extension CustomTextTheme on TextTheme {
       );
 
   TextStyle get body1Regular => TextStyle(
-        fontSize: SizeConfig.getFontSize(start: 10, end: 16),
+        fontSize: SizeConfig.getFontSize(start: 12, end: 16),
         fontWeight: FontWeight.w400,
         color: ColorShades.white,
       );

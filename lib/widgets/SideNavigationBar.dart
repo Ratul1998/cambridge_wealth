@@ -32,8 +32,8 @@ class SideNavigationBarState extends State<SideNavigationBar> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            height: 80,
-            width: 80,
+            height: 64,
+            width: 64,
             margin: const EdgeInsets.all(Spacing.space12)
                 .copyWith(bottom: Spacing.space64),
             decoration: const BoxDecoration(

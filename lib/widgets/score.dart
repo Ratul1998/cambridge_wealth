@@ -13,6 +13,7 @@ class Score extends StatelessWidget {
     return Expanded(
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: Spacing.space20),
+        alignment: Alignment.center,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
