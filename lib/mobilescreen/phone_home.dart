@@ -1,6 +1,7 @@
 import 'package:cambridge_wealth/bloc/homepage/bloc.dart';
 import 'package:cambridge_wealth/bloc/homepage/event.dart';
 import 'package:cambridge_wealth/bloc/homepage/state.dart';
+import 'package:cambridge_wealth/mobilescreen/phone_notification.dart';
 import 'package:cambridge_wealth/models/bottom_navigation_item_data.dart';
 import 'package:cambridge_wealth/models/home_page_data.dart';
 import 'package:cambridge_wealth/utils/size_config.dart';
@@ -53,47 +54,53 @@ class PhoneHomeState extends State<PhoneHome> {
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
-          body: BlocBuilder<HomePageBloc,HomePageState>(
+          body: BlocBuilder<HomePageBloc, HomePageState>(
+              builder: (context, state) {
+            Widget widget = const SizedBox();
 
-            builder: (context, state) {
+            if (state is FetchingState) {
+              widget = const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              );
+            } else if (state is FetchedState) {
+              HomePageData homePageData = state.homePageData;
 
-              Widget widget = const SizedBox();
-
-              if(state is FetchingState){
-                widget =  const Center(child: CircularProgressIndicator(color: Colors.white,),);
-              }
-              else if(state is FetchedState){
-
-                HomePageData homePageData = state.homePageData;
-
-                widget = SingleChildScrollView(
-                  physics: const ScrollPhysics(),
-                  child: Column(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(
-                            right: Spacing.space24,
-                            left: Spacing.space24,
-                            top: Spacing.space40,
-                            bottom: Spacing.space32),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 56,
-                              width: 56,
-                              decoration: const BoxDecoration(
-                                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                                  color: Colors.white,
-                                  image: DecorationImage(
-                                      image: AssetImage('assets/images/applogo.png'),
-                                      fit: BoxFit.cover,
-                                      scale: 0.1)),
-                            ),
-                            Expanded(
-                              child: Container(),
-                            ),
-                            Container(
+              widget = SingleChildScrollView(
+                physics: const ScrollPhysics(),
+                child: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(
+                          right: Spacing.space24,
+                          left: Spacing.space24,
+                          top: Spacing.space40,
+                          bottom: Spacing.space32),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 56,
+                            width: 56,
+                            decoration: const BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8)),
+                                color: Colors.white,
+                                image: DecorationImage(
+                                    image:
+                                        AssetImage('assets/images/applogo.png'),
+                                    fit: BoxFit.cover,
+                                    scale: 0.1)),
+                          ),
+                          Expanded(
+                            child: Container(),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const PhoneNotification()));
+                            },
+                            child: Container(
                               width: 48,
                               height: 48,
                               decoration: BoxDecoration(
@@ -105,84 +112,86 @@ class PhoneHomeState extends State<PhoneHome> {
                                 color: Colors.white,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(
-                            left: Spacing.space24,
-                            right: Spacing.space24,
-                            bottom: Spacing.space16),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: 8,
-                              height: SizeConfig.screenHeight * 0.15,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.amber),
-                            ),
-                            Expanded(
-                                child: Column(
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(
+                          left: Spacing.space24,
+                          right: Spacing.space24,
+                          bottom: Spacing.space16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 8,
+                            height: SizeConfig.screenHeight * 0.15,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.amber),
+                          ),
+                          Expanded(
+                              child: Column(
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.only(top: 12),
+                                child: Row(
                                   children: [
+                                    const Score(
+                                        value: '14,552', title: 'SCORE'),
                                     Container(
-                                      margin: const EdgeInsets.only(top: 12),
-                                      child: Row(
-                                        children: [
-                                          const Score(value: '14,552', title: 'SCORE'),
-                                          Container(
-                                            width: 1,
-                                            height: 56,
-                                            color: Colors.white,
-                                          ),
-                                          const Score(value: '10,552', title: 'CREDIT'),
-                                          Container(
-                                            width: 1,
-                                            height: 56,
-                                            color: Colors.white,
-                                          ),
-                                          const Score(value: '1,552', title: 'COINS'),
-                                        ],
-                                      ),
+                                      width: 1,
+                                      height: 56,
+                                      color: Colors.white,
                                     ),
+                                    const Score(
+                                        value: '10,552', title: 'CREDIT'),
                                     Container(
-                                      margin: const EdgeInsets.only(
-                                          left: 16, top: 12, bottom: 12),
-                                      child: Text(
-                                        homePageData.description,
-                                        style: context.textTheme.body1Normal,
-                                      ),
+                                      width: 1,
+                                      height: 56,
+                                      color: Colors.white,
                                     ),
+                                    const Score(value: '1,552', title: 'COINS'),
                                   ],
-                                )),
-                          ],
-                        ),
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(
+                                    left: 16, top: 12, bottom: 12),
+                                child: Text(
+                                  homePageData.description,
+                                  style: context.textTheme.body1Normal,
+                                ),
+                              ),
+                            ],
+                          )),
+                        ],
                       ),
-                      ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: homePageData.homePageCards.length,
-                          itemBuilder: (context, index) {
-                            return HomePageRow(
-                              homePageCardData: homePageData.homePageCards[index],
-                            );
-                          }),
-                    ],
-                  ),
-                );
-
-              }
-              else if(state is ErrorState){
-
-                widget = Center(child: Text(state.message,style: context.textTheme.h2,),);
-
-              }
-
-              return widget;
-
+                    ),
+                    ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: homePageData.homePageCards.length,
+                        itemBuilder: (context, index) {
+                          return HomePageRow(
+                            homePageCardData: homePageData.homePageCards[index],
+                          );
+                        }),
+                  ],
+                ),
+              );
+            } else if (state is ErrorState) {
+              widget = Center(
+                child: Text(
+                  state.message,
+                  style: context.textTheme.h2,
+                ),
+              );
             }
-          ),
+
+            return widget;
+          }),
           bottomNavigationBar: Container(
             height: 80,
             decoration: BoxDecoration(

@@ -9,7 +9,9 @@ import 'notification_row.dart';
 
 class NotificationSection extends StatefulWidget {
 
-  const NotificationSection({Key? key}) : super(key: key);
+  final double marginTop,marginLeft,marginRight;
+
+  const NotificationSection({Key? key, required this.marginTop, required this.marginLeft, required this.marginRight}) : super(key: key);
 
   @override
   State<StatefulWidget> createState()=> NotificationSectionState();
@@ -31,68 +33,66 @@ class NotificationSectionState extends State<NotificationSection> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        margin:
-        const EdgeInsets.only(top: Spacing.space40, right: Spacing.space56),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                    child: Container(
-                      margin: const EdgeInsets.only(right: Spacing.space32),
-                      child: Text(
-                        'NOTIFICATIONS',
-                        style: context.textTheme.h1,
-                      ),
-                    )),
-                InkWell(
-                  onTap: () {},
+    return Container(
+      margin:
+      EdgeInsets.only(top: widget.marginTop, right: widget.marginRight ,left: widget.marginLeft),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
                   child: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(40),
-                        color: Colors.white),
-                    child: const Icon(Icons.menu),
-                  ),
+                    margin: const EdgeInsets.only(right: Spacing.space32),
+                    child: Text(
+                      'NOTIFICATIONS',
+                      style: context.textTheme.h1,
+                    ),
+                  )),
+              InkWell(
+                onTap: () {},
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(40),
+                      color: Colors.white),
+                  child: const Icon(Icons.menu),
                 ),
-              ],
-            ),
-            Expanded(
-
-              child: BlocBuilder<NotificationBloc,NotificationState>(
-
-                builder: (context,state) {
-
-                  Widget widget = const SizedBox();
-
-                  if(state is FetchingState){
-                    widget = Center(child: CircularProgressIndicator(color: context.colorScheme.primaryColor,),);
-                  }
-                  else if(state is FetchedState){
-
-                    widget = ListView.builder(
-                        padding: const EdgeInsets.only(top: Spacing.space8),
-                        controller: _scrollController,
-                        shrinkWrap: true,
-                        itemCount: state.notifications.length,
-                        itemBuilder: (context, index) => NotificationRow(
-                          notificationData: state.notifications[index],
-                        ));
-                  }
-                  else if(state is ErrorState){
-
-                    widget = Center(child: Text(state.message,style: context.textTheme.h2,),);
-                  }
-
-                  return widget;
-                }
               ),
+            ],
+          ),
+          Expanded(
+
+            child: BlocBuilder<NotificationBloc,NotificationState>(
+
+              builder: (context,state) {
+
+                Widget widget = const SizedBox();
+
+                if(state is FetchingState){
+                  widget = Center(child: CircularProgressIndicator(color: context.colorScheme.primaryColor,),);
+                }
+                else if(state is FetchedState){
+
+                  widget = ListView.builder(
+                      padding: const EdgeInsets.only(top: Spacing.space8),
+                      controller: _scrollController,
+                      shrinkWrap: true,
+                      itemCount: state.notifications.length,
+                      itemBuilder: (context, index) => NotificationRow(
+                        notificationData: state.notifications[index],
+                      ));
+                }
+                else if(state is ErrorState){
+
+                  widget = Center(child: Text(state.message,style: context.textTheme.h2,),);
+                }
+
+                return widget;
+              }
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

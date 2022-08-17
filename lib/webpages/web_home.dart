@@ -200,7 +200,7 @@ class WebHomeState extends State<WebHome> {
                   ],
                 ),
               ),
-              NotificationSection(),
+              const Expanded(child: NotificationSection(marginLeft: 0,marginRight: Spacing.space56,marginTop: Spacing.space40,)),
             ],
           ),
         ),
