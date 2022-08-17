@@ -1,4 +1,5 @@
 import 'package:cambridge_wealth/models/notification_data.dart';
+import 'package:cambridge_wealth/utils/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,6 @@ class NotificationRow extends StatefulWidget {
 }
 
 class NotificationRowState extends State<NotificationRow> {
-
   bool isExpanded = false;
   String description = '';
 
@@ -27,10 +27,10 @@ class NotificationRowState extends State<NotificationRow> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      padding: const EdgeInsets.all(12),
+      margin: const EdgeInsets.symmetric(vertical: Spacing.space8),
+      padding: const EdgeInsets.all(Spacing.space12),
       decoration: BoxDecoration(
-        color: Colors.grey[900],
+        color: context.colorScheme.blackShade,
         border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
         borderRadius: BorderRadius.circular(8),
       ),
@@ -39,7 +39,7 @@ class NotificationRowState extends State<NotificationRow> {
           Container(
             width: 56,
             height: 56,
-            margin: const EdgeInsets.only(right: 8),
+            margin: const EdgeInsets.only(right: Spacing.space8),
             decoration: BoxDecoration(
                 color: Colors.black87,
                 border: Border.all(color: Colors.white.withOpacity(0.2)),
@@ -53,32 +53,33 @@ class NotificationRowState extends State<NotificationRow> {
           ),
           Expanded(
               child: Container(
-            margin: const EdgeInsets.only(right: 8),
+            margin: const EdgeInsets.only(right: Spacing.space8),
             child: RichText(
                 text: TextSpan(
-                    text: isExpanded ? description : description.length > 100
-                        ? description.substring(0, 100)
-                        : description,
-                    style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white),
-                    children: widget.notificationData.description.length > 100 && !isExpanded ? [
-                      const TextSpan(text: ' '),
-                  TextSpan(
-                      text: 'Read more...',
-                      style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          decoration: TextDecoration.underline),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          setState((){
-                            isExpanded = true;
-                          });
-                        })
-                ] : [])),
+                    text: isExpanded
+                        ? description
+                        : description.length > 100
+                            ? description.substring(0, 100)
+                            : description,
+                    style: context.textTheme.body1Regular,
+                    children: widget.notificationData.description.length >
+                                100 &&
+                            !isExpanded
+                        ? [
+                            const TextSpan(text: ' '),
+                            TextSpan(
+                                text: 'Read more...',
+                                style: context.textTheme.body1Regular.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    decoration: TextDecoration.underline),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    setState(() {
+                                      isExpanded = true;
+                                    });
+                                  })
+                          ]
+                        : [])),
           )),
         ],
       ),

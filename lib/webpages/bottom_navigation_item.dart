@@ -1,12 +1,11 @@
 import 'package:cambridge_wealth/models/bottom_navigation_item_data.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cambridge_wealth/utils/style.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavigationButton extends StatelessWidget {
   final NavigationButtonData navigationButtonData;
 
-  const BottomNavigationButton(
-      {Key? key, required this.navigationButtonData})
+  const BottomNavigationButton({Key? key, required this.navigationButtonData})
       : super(key: key);
 
   @override
@@ -20,7 +19,7 @@ class BottomNavigationButton extends StatelessWidget {
             child: Icon(
               navigationButtonData.icon,
               color: navigationButtonData.selected
-                  ? Colors.amber
+                  ? context.colorScheme.primaryColor
                   : Colors.white,
             ),
           ),
@@ -28,11 +27,9 @@ class BottomNavigationButton extends StatelessWidget {
             margin: const EdgeInsets.only(bottom: 8),
             child: Text(
               navigationButtonData.name,
-              style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
+              style: context.textTheme.body1Medium.copyWith(
                   color: navigationButtonData.selected
-                      ? Colors.amber
+                      ? context.colorScheme.primaryColor
                       : Colors.white),
             ),
           ),
@@ -41,11 +38,11 @@ class BottomNavigationButton extends StatelessWidget {
             child: Container(
               height: 10,
               width: 20,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
                     topRight: Radius.circular(20),
                     topLeft: Radius.circular(20)),
-                color: Colors.amber,
+                color: context.colorScheme.primaryColor,
               ),
             ),
           )

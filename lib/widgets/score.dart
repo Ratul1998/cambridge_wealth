@@ -1,3 +1,4 @@
+import 'package:cambridge_wealth/utils/style.dart';
 import 'package:flutter/material.dart';
 
 class Score extends StatelessWidget {
@@ -11,26 +12,20 @@ class Score extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20),
+        margin: const EdgeInsets.symmetric(horizontal: Spacing.space20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: const EdgeInsets.only(bottom: 8),
+              margin: const EdgeInsets.only(bottom: Spacing.space8),
               child: Text(
                 value,
-                style: const TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600),
+                style: context.textTheme.h1,
               ),
             ),
             Text(
               title,
-              style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400),
+              style: context.textTheme.h2,
             ),
           ],
         ),

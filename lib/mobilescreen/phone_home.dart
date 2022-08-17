@@ -1,4 +1,6 @@
 import 'package:cambridge_wealth/models/bottom_navigation_item_data.dart';
+import 'package:cambridge_wealth/utils/size_config.dart';
+import 'package:cambridge_wealth/utils/style.dart';
 import 'package:cambridge_wealth/widgets/score.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +27,7 @@ class PhoneHomeState extends State<PhoneHome> {
     return Stack(
       children: [
         Container(
-          height: MediaQuery.of(context).size.height / 2.5,
+          height: SizeConfig.screenHeight / 2.5,
           decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('assets/images/homebg.png'),
@@ -33,18 +35,7 @@ class PhoneHomeState extends State<PhoneHome> {
           ),
         ),
         Container(
-          decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                  stops: [
-                0.45,
-                0.9,
-              ],
-                  colors: [
-                Colors.black,
-                Colors.transparent
-              ])),
+          decoration: const BoxDecoration(gradient: Gradients.backGround),
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
@@ -54,7 +45,10 @@ class PhoneHomeState extends State<PhoneHome> {
               children: [
                 Container(
                   margin: const EdgeInsets.only(
-                      right: 24, left: 24, top: 40, bottom: 30),
+                      right: Spacing.space24,
+                      left: Spacing.space24,
+                      top: Spacing.space40,
+                      bottom: Spacing.space32),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -88,14 +82,16 @@ class PhoneHomeState extends State<PhoneHome> {
                   ),
                 ),
                 Container(
-                  margin:
-                      const EdgeInsets.only(left: 24, right: 24, bottom: 16),
+                  margin: const EdgeInsets.only(
+                      left: Spacing.space24,
+                      right: Spacing.space24,
+                      bottom: Spacing.space16),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
                         width: 8,
-                        height: MediaQuery.of(context).size.height * 0.15,
+                        height: SizeConfig.screenHeight * 0.15,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.amber),
@@ -126,12 +122,9 @@ class PhoneHomeState extends State<PhoneHome> {
                           Container(
                             margin: const EdgeInsets.only(
                                 left: 16, top: 12, bottom: 12),
-                            child: const Text(
+                            child: Text(
                               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam facilisis at nisl eget accumsan. Phasellus sollicitudin dolor quis semper posuere. Nam lobortis ante sit amet vulputate consequat.',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400),
+                              style: context.textTheme.body1Normal,
                             ),
                           ),
                         ],
