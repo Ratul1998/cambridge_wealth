@@ -20,8 +20,6 @@ class WebHome extends StatefulWidget {
 }
 
 class WebHomeState extends State<WebHome> {
-  final borderSide = BorderSide(color: Colors.white.withOpacity(0.3), width: 1);
-
   late HomePageBloc homePageBloc;
 
   int selectedIndex = 0;
@@ -77,12 +75,8 @@ class WebHomeState extends State<WebHome> {
                         decoration: BoxDecoration(
                             color:
                                 context.colorScheme.blackShade.withOpacity(0.8),
-                            //borderRadius: const BorderRadius.only(topLeft: Radius.circular(8),topRight: Radius.circular(8)),
-                            border: Border(
-                              left: borderSide,
-                              right: borderSide,
-                              top: borderSide,
-                            )),
+                            borderRadius: const BorderRadius.only(topLeft: Radius.circular(8),topRight: Radius.circular(8)),
+                            border: Border.all(color: Colors.white.withOpacity(0.3))),
                         child: BlocBuilder<HomePageBloc, HomePageState>(
                             builder: (context, state) {
                           Widget widget = const SizedBox();
@@ -175,9 +169,9 @@ class WebHomeState extends State<WebHome> {
                                                 ),
                                                 Container(
                                                   margin: const EdgeInsets.only(
-                                                      left: 16,
-                                                      top: 12,
-                                                      bottom: 12),
+                                                      left: Spacing.space16,
+                                                      top: Spacing.space24,
+                                                      bottom: Spacing.space12),
                                                   child: Text(
                                                     homePageData.description,
                                                     style: context
