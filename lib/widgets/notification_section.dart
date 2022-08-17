@@ -8,18 +8,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'notification_row.dart';
 
 class NotificationSection extends StatefulWidget {
+  final double marginTop, marginLeft, marginRight;
 
-  final double marginTop,marginLeft,marginRight;
-
-  const NotificationSection({Key? key, required this.marginTop, required this.marginLeft, required this.marginRight}) : super(key: key);
+  const NotificationSection(
+      {Key? key,
+      required this.marginTop,
+      required this.marginLeft,
+      required this.marginRight})
+      : super(key: key);
 
   @override
-  State<StatefulWidget> createState()=> NotificationSectionState();
-
+  State<StatefulWidget> createState() => NotificationSectionState();
 }
 
 class NotificationSectionState extends State<NotificationSection> {
-
   final ScrollController _scrollController = ScrollController();
 
   late NotificationBloc notificationBloc;
@@ -34,20 +36,22 @@ class NotificationSectionState extends State<NotificationSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin:
-      EdgeInsets.only(top: widget.marginTop, right: widget.marginRight ,left: widget.marginLeft),
+      margin: EdgeInsets.only(
+          top: widget.marginTop,
+          right: widget.marginRight,
+          left: widget.marginLeft),
       child: Column(
         children: [
           Row(
             children: [
               Expanded(
                   child: Container(
-                    margin: const EdgeInsets.only(right: Spacing.space32),
-                    child: Text(
-                      'NOTIFICATIONS',
-                      style: context.textTheme.h1,
-                    ),
-                  )),
+                margin: const EdgeInsets.only(right: Spacing.space32),
+                child: Text(
+                  'NOTIFICATIONS',
+                  style: context.textTheme.h1,
+                ),
+              )),
               InkWell(
                 onTap: () {},
                 child: Container(
@@ -62,39 +66,39 @@ class NotificationSectionState extends State<NotificationSection> {
             ],
           ),
           Expanded(
+            child: BlocBuilder<NotificationBloc, NotificationState>(
+                builder: (context, state) {
+              Widget widget = const SizedBox();
 
-            child: BlocBuilder<NotificationBloc,NotificationState>(
-
-              builder: (context,state) {
-
-                Widget widget = const SizedBox();
-
-                if(state is FetchingState){
-                  widget = Center(child: CircularProgressIndicator(color: context.colorScheme.primaryColor,),);
-                }
-                else if(state is FetchedState){
-
-                  widget = ListView.builder(
-                      padding: const EdgeInsets.only(top: Spacing.space8),
-                      controller: _scrollController,
-                      shrinkWrap: true,
-                      itemCount: state.notifications.length,
-                      itemBuilder: (context, index) => NotificationRow(
-                        notificationData: state.notifications[index],
-                      ));
-                }
-                else if(state is ErrorState){
-
-                  widget = Center(child: Text(state.message,style: context.textTheme.h2,),);
-                }
-
-                return widget;
+              if (state is FetchingState) {
+                widget = Center(
+                  child: CircularProgressIndicator(
+                    color: context.colorScheme.primaryColor,
+                  ),
+                );
+              } else if (state is FetchedState) {
+                widget = ListView.builder(
+                    padding: const EdgeInsets.only(top: Spacing.space8),
+                    controller: _scrollController,
+                    shrinkWrap: true,
+                    itemCount: state.notifications.length,
+                    itemBuilder: (context, index) => NotificationRow(
+                          notificationData: state.notifications[index],
+                        ));
+              } else if (state is ErrorState) {
+                widget = Center(
+                  child: Text(
+                    state.message,
+                    style: context.textTheme.h2,
+                  ),
+                );
               }
-            ),
+
+              return widget;
+            }),
           ),
         ],
       ),
     );
   }
-
 }

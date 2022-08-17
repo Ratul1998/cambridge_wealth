@@ -1,12 +1,15 @@
 import 'package:cambridge_wealth/utils/style.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../models/bottom_navigation_item_data.dart';
 import '../webpages/side_navigation_item.dart';
 
 class SideNavigationBar extends StatefulWidget {
-  const SideNavigationBar({Key? key}) : super(key: key);
+  final Function callback;
+  final int selectedIndex;
+  const SideNavigationBar(
+      {Key? key, required this.callback, required this.selectedIndex})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() => SideNavigationBarState();
@@ -15,9 +18,13 @@ class SideNavigationBar extends StatefulWidget {
 class SideNavigationBarState extends State<SideNavigationBar> {
   List<NavigationButtonData> actions = [
     NavigationButtonData(
-        onClick: () {}, icon: Icons.home, name: 'Home', selected: true),
+      icon: Icons.home,
+      name: 'Home',
+    ),
     NavigationButtonData(
-        onClick: () {}, icon: Icons.settings, name: 'Settings', selected: false)
+      icon: Icons.settings,
+      name: 'Settings',
+    )
   ];
 
   @override
@@ -44,9 +51,20 @@ class SideNavigationBarState extends State<SideNavigationBar> {
                     fit: BoxFit.cover,
                     scale: 0.1)),
           ),
-          ...actions
-              .map((e) => SideNavigationItem(navigationButtonData: e))
-              .toList(),
+          SideNavigationItem(
+            navigationButtonData: actions[0],
+            onClick: () {
+              widget.callback(0);
+            },
+            selected: widget.selectedIndex == 0,
+          ),
+          SideNavigationItem(
+            navigationButtonData: actions[1],
+            onClick: () {
+              widget.callback(1);
+            },
+            selected: widget.selectedIndex == 1,
+          ),
           const Expanded(child: SizedBox()),
           Container(
               margin: const EdgeInsets.symmetric(horizontal: 36, vertical: 56),

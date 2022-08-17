@@ -1,3 +1,3 @@
-abstract class NotificationEvent{}
+abstract class NotificationEvent {}
 
-class FetchNotificationData extends NotificationEvent{}
+class FetchNotificationData extends NotificationEvent {}

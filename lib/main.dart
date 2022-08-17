@@ -16,16 +16,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.amber,
-      ),
-      home: MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (context) => HomePageBloc(HomeRepository())),
-          BlocProvider(create: (context) => NotificationBloc(NotificationRepository())),
-        ],
-        child: const HomePage(),
-      )
-    );
+        theme: ThemeData(
+          primarySwatch: Colors.amber,
+        ),
+        home: MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => HomePageBloc(HomeRepository())),
+            BlocProvider(
+                create: (context) =>
+                    NotificationBloc(NotificationRepository())),
+          ],
+          child: const HomePage(),
+        ));
   }
 }

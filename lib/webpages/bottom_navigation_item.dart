@@ -4,23 +4,27 @@ import 'package:flutter/material.dart';
 
 class BottomNavigationButton extends StatelessWidget {
   final NavigationButtonData navigationButtonData;
+  final Function() onClick;
+  final bool selected;
 
-  const BottomNavigationButton({Key? key, required this.navigationButtonData})
+  const BottomNavigationButton(
+      {Key? key,
+      required this.navigationButtonData,
+      required this.onClick,
+      required this.selected})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: navigationButtonData.onClick,
+      onTap: onClick,
       child: Column(
         children: [
           Container(
             margin: const EdgeInsets.only(top: 16, bottom: 8),
             child: Icon(
               navigationButtonData.icon,
-              color: navigationButtonData.selected
-                  ? context.colorScheme.primaryColor
-                  : Colors.white,
+              color: selected ? context.colorScheme.primaryColor : Colors.white,
             ),
           ),
           Container(
@@ -28,13 +32,13 @@ class BottomNavigationButton extends StatelessWidget {
             child: Text(
               navigationButtonData.name,
               style: context.textTheme.body1Medium.copyWith(
-                  color: navigationButtonData.selected
+                  color: selected
                       ? context.colorScheme.primaryColor
                       : Colors.white),
             ),
           ),
           Visibility(
-            visible: navigationButtonData.selected,
+            visible: selected,
             child: Container(
               height: 10,
               width: 20,

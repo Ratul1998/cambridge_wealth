@@ -1,3 +1,3 @@
-abstract class HomePageEvent{}
+abstract class HomePageEvent {}
 
-class FetchHomePageData extends HomePageEvent{}
+class FetchHomePageData extends HomePageEvent {}

@@ -24,6 +24,14 @@ class WebHomeState extends State<WebHome> {
 
   late HomePageBloc homePageBloc;
 
+  int selectedIndex = 0;
+
+  callback(index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
+
   @override
   void initState() {
     homePageBloc = BlocProvider.of<HomePageBloc>(context);
@@ -47,7 +55,10 @@ class WebHomeState extends State<WebHome> {
           backgroundColor: Colors.transparent,
           body: Row(
             children: [
-              const SideNavigationBar(),
+              SideNavigationBar(
+                callback: callback,
+                selectedIndex: selectedIndex,
+              ),
               Container(
                 margin: const EdgeInsets.only(
                     bottom: 0, left: 40, right: 40, top: 56),
@@ -72,135 +83,149 @@ class WebHomeState extends State<WebHome> {
                               right: borderSide,
                               top: borderSide,
                             )),
-                        child: BlocBuilder<HomePageBloc,HomePageState>(
+                        child: BlocBuilder<HomePageBloc, HomePageState>(
+                            builder: (context, state) {
+                          Widget widget = const SizedBox();
 
-                          builder: (context,state) {
+                          if (state is FetchingState) {
+                            widget = Center(
+                              child: CircularProgressIndicator(
+                                color: context.colorScheme.primaryColor,
+                              ),
+                            );
+                          } else if (state is FetchedState) {
+                            HomePageData homePageData = state.homePageData;
 
-                            Widget widget = const SizedBox();
-
-                            if(state is FetchingState){
-                              widget = Center(child: CircularProgressIndicator(color: context.colorScheme.primaryColor,),);
-                            }
-                            else if(state is FetchedState){
-
-                              HomePageData homePageData = state.homePageData;
-
-                              widget = RawScrollbar(
-                                isAlwaysShown: true,
-                                thumbColor: Colors.grey[800],
-                                radius: const Radius.circular(8),
-                                thickness: 4,
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        margin: const EdgeInsets.only(
-                                            left: Spacing.space32,
-                                            top: Spacing.space40,
-                                            bottom: Spacing.space32),
-                                        child: Text(
-                                          'TITLE',
-                                          style: context.textTheme.h1,
-                                        ),
+                            widget = RawScrollbar(
+                              isAlwaysShown: true,
+                              thumbColor: Colors.grey[800],
+                              radius: const Radius.circular(8),
+                              thickness: 4,
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      margin: const EdgeInsets.only(
+                                          left: Spacing.space32,
+                                          top: Spacing.space40,
+                                          bottom: Spacing.space32),
+                                      child: Text(
+                                        'TITLE',
+                                        style: context.textTheme.h1,
                                       ),
-                                      Container(
-                                        margin: const EdgeInsets.only(
-                                            left: Spacing.space24,
-                                            right: Spacing.space24,
-                                            bottom: Spacing.space16),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              width: 8,
-                                              height: SizeConfig.screenHeight * 0.15,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                  BorderRadius.circular(10),
-                                                  color: context
-                                                      .colorScheme.primaryColor),
-                                            ),
-                                            Expanded(
-                                                child: Column(
+                                    ),
+                                    Container(
+                                      margin: const EdgeInsets.only(
+                                          left: Spacing.space24,
+                                          right: Spacing.space24,
+                                          bottom: Spacing.space16),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            width: 8,
+                                            height:
+                                                SizeConfig.screenHeight * 0.15,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: context
+                                                    .colorScheme.primaryColor),
+                                          ),
+                                          Expanded(
+                                              child: Column(
+                                            children: [
+                                              Container(
+                                                margin: const EdgeInsets.only(
+                                                    top: Spacing.space12),
+                                                child: Row(
                                                   children: [
+                                                    const Score(
+                                                        value: '14,552',
+                                                        title: 'SCORE'),
                                                     Container(
-                                                      margin: const EdgeInsets.only(
-                                                          top: Spacing.space12),
-                                                      child: Row(
-                                                        children: [
-                                                          const Score(
-                                                              value: '14,552',
-                                                              title: 'SCORE'),
-                                                          Container(
-                                                            width: 1,
-                                                            height: 56,
-                                                            color: Colors.white,
-                                                          ),
-                                                          const Score(
-                                                              value: '10,552',
-                                                              title: 'CREDIT'),
-                                                          Container(
-                                                            width: 1,
-                                                            height: 56,
-                                                            color: Colors.white,
-                                                          ),
-                                                          const Score(
-                                                              value: '1,552',
-                                                              title: 'COINS'),
-                                                          Container(
-                                                            width: 1,
-                                                            height: 56,
-                                                            color: Colors.white,
-                                                          ),
-                                                          const Score(
-                                                              value: '2,552',
-                                                              title: 'MONEY'),
-                                                        ],
-                                                      ),
+                                                      width: 1,
+                                                      height: 56,
+                                                      color: Colors.white,
                                                     ),
+                                                    const Score(
+                                                        value: '10,552',
+                                                        title: 'CREDIT'),
                                                     Container(
-                                                      margin: const EdgeInsets.only(
-                                                          left: 16, top: 12, bottom: 12),
-                                                      child: Text(
-                                                        homePageData.description,
-                                                        style:
-                                                        context.textTheme.body1Normal,
-                                                      ),
+                                                      width: 1,
+                                                      height: 56,
+                                                      color: Colors.white,
                                                     ),
+                                                    const Score(
+                                                        value: '1,552',
+                                                        title: 'COINS'),
+                                                    Container(
+                                                      width: 1,
+                                                      height: 56,
+                                                      color: Colors.white,
+                                                    ),
+                                                    const Score(
+                                                        value: '2,552',
+                                                        title: 'MONEY'),
                                                   ],
-                                                )),
-                                          ],
-                                        ),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin: const EdgeInsets.only(
+                                                    left: 16,
+                                                    top: 12,
+                                                    bottom: 12),
+                                                child: Text(
+                                                  homePageData.description,
+                                                  style: context
+                                                      .textTheme.body1Normal,
+                                                ),
+                                              ),
+                                            ],
+                                          )),
+                                        ],
                                       ),
-                                      ListView.builder(
-                                          physics:
-                                          const NeverScrollableScrollPhysics(),
-                                          shrinkWrap: true,
-                                          itemCount: homePageData.homePageCards.length,
-                                          itemBuilder: (context, index) {
-                                            return HomePageRow(
-                                              homePageCardData: homePageData.homePageCards[index],
-                                            );
-                                          }),
-                                    ],
-                                  ),
+                                    ),
+                                    ListView.builder(
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemCount:
+                                            homePageData.homePageCards.length,
+                                        itemBuilder: (context, index) {
+                                          return HomePageRow(
+                                            homePageCardData: homePageData
+                                                .homePageCards[index],
+                                          );
+                                        }),
+                                  ],
                                 ),
-                              );
-                            }
-                            else if(state is ErrorState){
-                              widget = Center(child: Text(state.message,style: context.textTheme.h2,),);
-                            }
-
-                            return widget;
+                              ),
+                            );
+                          } else if (state is ErrorState) {
+                            widget = Center(
+                              child: Text(
+                                state.message,
+                                style: context.textTheme.h2,
+                              ),
+                            );
                           }
-                        ),
+
+                          return widget;
+                        }),
                       ),
                     ),
                   ],
                 ),
               ),
-              const Expanded(child: NotificationSection(marginLeft: 0,marginRight: Spacing.space56,marginTop: Spacing.space40,)),
+              const Expanded(
+                  child: NotificationSection(
+                marginLeft: 0,
+                marginRight: Spacing.space56,
+                marginTop: Spacing.space40,
+              )),
             ],
           ),
         ),

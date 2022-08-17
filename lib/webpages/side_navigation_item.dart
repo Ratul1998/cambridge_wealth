@@ -5,14 +5,19 @@ import '../models/bottom_navigation_item_data.dart';
 
 class SideNavigationItem extends StatelessWidget {
   final NavigationButtonData navigationButtonData;
-
-  const SideNavigationItem({Key? key, required this.navigationButtonData})
+  final bool selected;
+  final Function() onClick;
+  const SideNavigationItem(
+      {Key? key,
+      required this.navigationButtonData,
+      required this.selected,
+      required this.onClick})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: navigationButtonData.onClick,
+      onTap: onClick,
       child: Row(
         children: [
           Expanded(
@@ -22,7 +27,7 @@ class SideNavigationItem extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 24, bottom: 8),
                   child: Icon(
                     navigationButtonData.icon,
-                    color: navigationButtonData.selected
+                    color: selected
                         ? context.colorScheme.primaryColor
                         : Colors.white,
                   ),
@@ -32,7 +37,7 @@ class SideNavigationItem extends StatelessWidget {
                   child: Text(
                     navigationButtonData.name,
                     style: context.textTheme.body1Medium.copyWith(
-                        color: navigationButtonData.selected
+                        color: selected
                             ? context.colorScheme.primaryColor
                             : Colors.white),
                   ),
@@ -41,7 +46,7 @@ class SideNavigationItem extends StatelessWidget {
             ),
           ),
           Visibility(
-            visible: navigationButtonData.selected,
+            visible: selected,
             child: Container(
               height: 80,
               width: 4,

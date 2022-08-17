@@ -71,7 +71,7 @@ class Gradients {
       begin: Alignment.bottomCenter,
       end: Alignment.topCenter,
       stops: [
-        0.45,
+        0.6,
         0.9,
       ],
       colors: [
