@@ -5,6 +5,7 @@ import 'package:cambridge_wealth/models/home_page_data.dart';
 import 'package:cambridge_wealth/utils/size_config.dart';
 import 'package:cambridge_wealth/widgets/SideNavigationBar.dart';
 import 'package:cambridge_wealth/widgets/notification_section.dart';
+import 'package:cambridge_wealth/widgets/user_settings.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../utils/style.dart';
 import 'package:flutter/material.dart';
@@ -95,115 +96,120 @@ class WebHomeState extends State<WebHome> {
                             );
                           } else if (state is FetchedState) {
                             HomePageData homePageData = state.homePageData;
-
-                            widget = RawScrollbar(
-                              isAlwaysShown: true,
-                              thumbColor: Colors.grey[800],
-                              radius: const Radius.circular(8),
-                              thickness: 4,
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      margin: const EdgeInsets.only(
-                                          left: Spacing.space32,
-                                          top: Spacing.space40,
-                                          bottom: Spacing.space32),
-                                      child: Text(
-                                        'TITLE',
-                                        style: context.textTheme.h1,
+                            if(selectedIndex == 0){
+                              widget = RawScrollbar(
+                                isAlwaysShown: true,
+                                thumbColor: Colors.grey[800],
+                                radius: const Radius.circular(8),
+                                thickness: 4,
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        margin: const EdgeInsets.only(
+                                            left: Spacing.space32,
+                                            top: Spacing.space40,
+                                            bottom: Spacing.space32),
+                                        child: Text(
+                                          'TITLE',
+                                          style: context.textTheme.h1,
+                                        ),
                                       ),
-                                    ),
-                                    Container(
-                                      margin: const EdgeInsets.only(
-                                          left: Spacing.space24,
-                                          right: Spacing.space24,
-                                          bottom: Spacing.space16),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            width: 8,
-                                            height:
-                                                SizeConfig.screenHeight * 0.15,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                color: context
-                                                    .colorScheme.primaryColor),
-                                          ),
-                                          Expanded(
-                                              child: Column(
-                                            children: [
-                                              Container(
-                                                margin: const EdgeInsets.only(
-                                                    top: Spacing.space12),
-                                                child: Row(
+                                      Container(
+                                        margin: const EdgeInsets.only(
+                                            left: Spacing.space24,
+                                            right: Spacing.space24,
+                                            bottom: Spacing.space16),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              width: 8,
+                                              height:
+                                              SizeConfig.screenHeight * 0.15,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius.circular(10),
+                                                  color: context
+                                                      .colorScheme.primaryColor),
+                                            ),
+                                            Expanded(
+                                                child: Column(
                                                   children: [
-                                                    const Score(
-                                                        value: '14,552',
-                                                        title: 'SCORE'),
                                                     Container(
-                                                      width: 1,
-                                                      height: 56,
-                                                      color: Colors.white,
+                                                      margin: const EdgeInsets.only(
+                                                          top: Spacing.space12),
+                                                      child: Row(
+                                                        children: [
+                                                          const Score(
+                                                              value: '14,552',
+                                                              title: 'SCORE'),
+                                                          Container(
+                                                            width: 1,
+                                                            height: 56,
+                                                            color: Colors.white,
+                                                          ),
+                                                          const Score(
+                                                              value: '10,552',
+                                                              title: 'CREDIT'),
+                                                          Container(
+                                                            width: 1,
+                                                            height: 56,
+                                                            color: Colors.white,
+                                                          ),
+                                                          const Score(
+                                                              value: '1,552',
+                                                              title: 'COINS'),
+                                                          Container(
+                                                            width: 1,
+                                                            height: 56,
+                                                            color: Colors.white,
+                                                          ),
+                                                          const Score(
+                                                              value: '2,552',
+                                                              title: 'MONEY'),
+                                                        ],
+                                                      ),
                                                     ),
-                                                    const Score(
-                                                        value: '10,552',
-                                                        title: 'CREDIT'),
                                                     Container(
-                                                      width: 1,
-                                                      height: 56,
-                                                      color: Colors.white,
+                                                      margin: const EdgeInsets.only(
+                                                          left: 16,
+                                                          top: 12,
+                                                          bottom: 12),
+                                                      child: Text(
+                                                        homePageData.description,
+                                                        style: context
+                                                            .textTheme.body1Normal,
+                                                      ),
                                                     ),
-                                                    const Score(
-                                                        value: '1,552',
-                                                        title: 'COINS'),
-                                                    Container(
-                                                      width: 1,
-                                                      height: 56,
-                                                      color: Colors.white,
-                                                    ),
-                                                    const Score(
-                                                        value: '2,552',
-                                                        title: 'MONEY'),
                                                   ],
-                                                ),
-                                              ),
-                                              Container(
-                                                margin: const EdgeInsets.only(
-                                                    left: 16,
-                                                    top: 12,
-                                                    bottom: 12),
-                                                child: Text(
-                                                  homePageData.description,
-                                                  style: context
-                                                      .textTheme.body1Normal,
-                                                ),
-                                              ),
-                                            ],
-                                          )),
-                                        ],
+                                                )),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    ListView.builder(
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
-                                        shrinkWrap: true,
-                                        itemCount:
-                                            homePageData.homePageCards.length,
-                                        itemBuilder: (context, index) {
-                                          return HomePageRow(
-                                            homePageCardData: homePageData
-                                                .homePageCards[index],
-                                          );
-                                        }),
-                                  ],
+                                      ListView.builder(
+                                          physics:
+                                          const NeverScrollableScrollPhysics(),
+                                          shrinkWrap: true,
+                                          itemCount:
+                                          homePageData.homePageCards.length,
+                                          itemBuilder: (context, index) {
+                                            return HomePageRow(
+                                              homePageCardData: homePageData
+                                                  .homePageCards[index],
+                                            );
+                                          }),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            );
+                              );
+                            }
+                            else{
+                              widget = const UserSettings(marginTop: Spacing.space32, marginLeft: Spacing.space16, marginRight: Spacing.space16);
+                            }
+
                           } else if (state is ErrorState) {
                             widget = Center(
                               child: Text(

@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../webpages/bottom_navigation_item.dart';
 import '../widgets/home_page_row.dart';
 import '../widgets/notification_section.dart';
+import '../widgets/user_settings.dart';
 
 class PhoneHome extends StatefulWidget {
   const PhoneHome({Key? key}) : super(key: key);
@@ -75,124 +76,132 @@ class PhoneHomeState extends State<PhoneHome> {
                     marginRight: Spacing.space16,
                     marginTop: Spacing.space16);
               } else {
-                widget = SingleChildScrollView(
-                  physics: const ScrollPhysics(),
-                  child: Column(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(
-                            right: Spacing.space24,
-                            left: Spacing.space24,
-                            top: Spacing.space40,
-                            bottom: Spacing.space32),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 56,
-                              width: 56,
-                              decoration: const BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8)),
-                                  color: Colors.white,
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/images/applogo.png'),
-                                      fit: BoxFit.cover,
-                                      scale: 0.1)),
-                            ),
-                            Expanded(
-                              child: Container(),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                setState(() {
-                                  isNotificationSelected = true;
-                                });
-                              },
-                              child: Container(
-                                width: 48,
-                                height: 48,
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.2),
-                                  borderRadius: BorderRadius.circular(36),
-                                ),
-                                child: const Icon(
-                                  Icons.notifications,
-                                  color: Colors.white,
+
+                if(selectedIndex == 0){
+                  widget = SingleChildScrollView(
+                    physics: const ScrollPhysics(),
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(
+                              right: Spacing.space24,
+                              left: Spacing.space24,
+                              top: Spacing.space40,
+                              bottom: Spacing.space32),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 56,
+                                width: 56,
+                                decoration: const BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(8)),
+                                    color: Colors.white,
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/applogo.png'),
+                                        fit: BoxFit.cover,
+                                        scale: 0.1)),
+                              ),
+                              Expanded(
+                                child: Container(),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    isNotificationSelected = true;
+                                    selectedIndex = -1;
+                                  });
+                                },
+                                child: Container(
+                                  width: 48,
+                                  height: 48,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.2),
+                                    borderRadius: BorderRadius.circular(36),
+                                  ),
+                                  child: const Icon(
+                                    Icons.notifications,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(
-                            left: Spacing.space24,
-                            right: Spacing.space24,
-                            bottom: Spacing.space16),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: 8,
-                              height: SizeConfig.screenHeight * 0.15,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.amber),
-                            ),
-                            Expanded(
-                                child: Column(
-                              children: [
-                                Container(
-                                  margin: const EdgeInsets.only(top: 12),
-                                  child: Row(
+                        Container(
+                          margin: const EdgeInsets.only(
+                              left: Spacing.space24,
+                              right: Spacing.space24,
+                              bottom: Spacing.space16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 8,
+                                height: SizeConfig.screenHeight * 0.15,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.amber),
+                              ),
+                              Expanded(
+                                  child: Column(
                                     children: [
-                                      const Score(
-                                          value: '14,552', title: 'SCORE'),
                                       Container(
-                                        width: 1,
-                                        height: 56,
-                                        color: Colors.white,
+                                        margin: const EdgeInsets.only(top: 12),
+                                        child: Row(
+                                          children: [
+                                            const Score(
+                                                value: '14,552', title: 'SCORE'),
+                                            Container(
+                                              width: 1,
+                                              height: 56,
+                                              color: Colors.white,
+                                            ),
+                                            const Score(
+                                                value: '10,552', title: 'CREDIT'),
+                                            Container(
+                                              width: 1,
+                                              height: 56,
+                                              color: Colors.white,
+                                            ),
+                                            const Score(
+                                                value: '1,552', title: 'COINS'),
+                                          ],
+                                        ),
                                       ),
-                                      const Score(
-                                          value: '10,552', title: 'CREDIT'),
                                       Container(
-                                        width: 1,
-                                        height: 56,
-                                        color: Colors.white,
+                                        margin: const EdgeInsets.only(
+                                            left: 16, top: 12, bottom: 12),
+                                        child: Text(
+                                          homePageData.description,
+                                          style: context.textTheme.body1Normal,
+                                        ),
                                       ),
-                                      const Score(
-                                          value: '1,552', title: 'COINS'),
                                     ],
-                                  ),
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.only(
-                                      left: 16, top: 12, bottom: 12),
-                                  child: Text(
-                                    homePageData.description,
-                                    style: context.textTheme.body1Normal,
-                                  ),
-                                ),
-                              ],
-                            )),
-                          ],
+                                  )),
+                            ],
+                          ),
                         ),
-                      ),
-                      ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: homePageData.homePageCards.length,
-                          itemBuilder: (context, index) {
-                            return HomePageRow(
-                              homePageCardData:
-                                  homePageData.homePageCards[index],
-                            );
-                          }),
-                    ],
-                  ),
-                );
+                        ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: homePageData.homePageCards.length,
+                            itemBuilder: (context, index) {
+                              return HomePageRow(
+                                homePageCardData:
+                                homePageData.homePageCards[index],
+                              );
+                            }),
+                      ],
+                    ),
+                  );
+                }
+                else {
+                  widget = const UserSettings(marginTop: Spacing.space32,marginRight: Spacing.space16,marginLeft: Spacing.space16,);
+                }
+
               }
             } else if (state is ErrorState) {
               widget = Center(
@@ -219,6 +228,7 @@ class PhoneHomeState extends State<PhoneHome> {
                         onClick: () {
                           setState(() {
                             selectedIndex = 0;
+                            isNotificationSelected = false;
                           });
                         },
                         selected: selectedIndex == 0)),
@@ -228,6 +238,7 @@ class PhoneHomeState extends State<PhoneHome> {
                         onClick: () {
                           setState(() {
                             selectedIndex = 1;
+                            isNotificationSelected = false;
                           });
                         },
                         selected: selectedIndex == 1)),
