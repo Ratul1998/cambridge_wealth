@@ -13,10 +13,10 @@ class PhoneHome extends StatefulWidget {
 }
 
 class PhoneHomeState extends State<PhoneHome> {
-  List<BottomNavigationItemData> actions = [
-    BottomNavigationItemData(
+  List<NavigationButtonData> actions = [
+    NavigationButtonData(
         onClick: () {}, icon: Icons.home, name: 'Home', selected: true),
-    BottomNavigationItemData(
+    NavigationButtonData(
         onClick: () {}, icon: Icons.settings, name: 'Settings', selected: false)
   ];
 
@@ -161,7 +161,7 @@ class PhoneHomeState extends State<PhoneHome> {
             child: Row(
               children: actions.map((e) {
                 return Expanded(
-                    child: BottomNavigationButton(bottomNavigationItemData: e));
+                    child: BottomNavigationButton(navigationButtonData: e));
               }).toList(),
             ),
           ),

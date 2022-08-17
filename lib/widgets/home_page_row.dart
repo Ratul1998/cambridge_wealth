@@ -13,7 +13,7 @@ class HomePageRow extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
       padding: const EdgeInsets.all(8),
-      height: 80,
+      height: MediaQuery.of(context).size.height * 0.15,
       decoration: BoxDecoration(
         color: Colors.grey[900],
         border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),

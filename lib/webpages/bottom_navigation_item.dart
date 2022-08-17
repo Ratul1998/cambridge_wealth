@@ -3,23 +3,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavigationButton extends StatelessWidget {
-  final BottomNavigationItemData bottomNavigationItemData;
+  final NavigationButtonData navigationButtonData;
 
   const BottomNavigationButton(
-      {Key? key, required this.bottomNavigationItemData})
+      {Key? key, required this.navigationButtonData})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: bottomNavigationItemData.onClick,
+      onTap: navigationButtonData.onClick,
       child: Column(
         children: [
           Container(
             margin: const EdgeInsets.only(top: 16, bottom: 8),
             child: Icon(
-              bottomNavigationItemData.icon,
-              color: bottomNavigationItemData.selected
+              navigationButtonData.icon,
+              color: navigationButtonData.selected
                   ? Colors.amber
                   : Colors.white,
             ),
@@ -27,17 +27,17 @@ class BottomNavigationButton extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(bottom: 8),
             child: Text(
-              bottomNavigationItemData.name,
+              navigationButtonData.name,
               style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
-                  color: bottomNavigationItemData.selected
+                  color: navigationButtonData.selected
                       ? Colors.amber
                       : Colors.white),
             ),
           ),
           Visibility(
-            visible: bottomNavigationItemData.selected,
+            visible: navigationButtonData.selected,
             child: Container(
               height: 10,
               width: 20,
