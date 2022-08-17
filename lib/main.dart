@@ -1,5 +1,7 @@
 import 'package:cambridge_wealth/bloc/homepage/bloc.dart';
+import 'package:cambridge_wealth/bloc/notifications/bloc.dart';
 import 'package:cambridge_wealth/repositories/home_repository.dart';
+import 'package:cambridge_wealth/repositories/notification_repository.dart';
 import 'package:cambridge_wealth/screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,6 +22,7 @@ class MyApp extends StatelessWidget {
       home: MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => HomePageBloc(HomeRepository())),
+          BlocProvider(create: (context) => NotificationBloc(NotificationRepository())),
         ],
         child: const HomePage(),
       )
