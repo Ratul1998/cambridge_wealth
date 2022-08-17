@@ -25,7 +25,7 @@ class ScoreLayout extends StatelessWidget {
             children: [
               Container(
                 width: 8,
-                height: context.displayHeight * 0.15,
+                height: 200,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: context.colorScheme.primaryColor),
